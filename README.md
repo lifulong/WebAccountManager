@@ -38,5 +38,5 @@
 
 ### Who Is Contibute
 	
-	Lifl/Mosai		<msl.fulong@gmail.com>	[http://lifulong.me](http://lifulong.me) [GitHub](https://github.com/lifulong)
+*	Lifl/Mosai		<msl.fulong@gmail.com>	[http://lifulong.me](http://lifulong.me) [GitHub](https://github.com/lifulong)
 

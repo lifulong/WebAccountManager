@@ -6,8 +6,8 @@
 * src directory
 * src/core directory
 
-* core.py: core file of WebAccountManager, provide interface for upper level use.
-* crypto.py: provide enc,dec,hash interface for WebAccountManager, abstact detail enc/dec method
+* core.py: core file of account-manager, provide interface for upper level use.
+* crypto.py: provide enc,dec,hash interface for account-manager, abstact detail enc/dec method
 * store.py: provide usr account record storage method, abstract detail storage in use,
 * file_store.py: use file as the usr account record storage
 * sqlite_store.py: use sqlite sqlserver as the usr account record storage[not implement]
@@ -25,13 +25,13 @@
 * provide an gui tool for usr to manage his web account[not implement]
 
 * src/test directory
-* provide test script for WebAccountManager[not implement]
+* provide test script for account-manager[not implement]
 
 * src/tool directory
-* provide debug/logging/config tool for WebAccountManager use[not implement]
+* provide debug/logging/config tool for account-manager use[not implement]
 
 * doc directory
-* provide design description of the WebAccountManager
+* provide design description of the account-manager
 
 
 * This Version Design And Write In Less Than 8 Hours, There Is Plenty Of Room For Improment,

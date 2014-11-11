@@ -101,6 +101,13 @@ class web_account_manager:
 		self.usr_key = usr_key
 		self.key = key
 
+	def get_manager_usr(self):
+		""" Get The Manager User Login, And Return It.
+
+			this method is used for check who has been login.
+		"""
+		return self.usr
+
 	def get_manager_usr_key(self):
 		""" Get The Manager User Passwd, And Return It.
 
@@ -168,6 +175,13 @@ class web_account_manager:
 		record = self.recorder.mk_record(ower, account, alias, email, mobile, passwd)
 		self.storage.append_record(record)
 		
+	def query_records(self, query_string):
+		"""
+		"""
+		pass
+
+	def del_records(self, del_string):
+		pass
 
 
 

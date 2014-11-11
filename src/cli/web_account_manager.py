@@ -10,6 +10,9 @@ from core import core
 help_msg = """
 	This Tool Is Used For Manage Your Web Account In Cmd Line.
 
+	You should create a user first when you use this clint tool first time;
+	And before you do anything with you account you should Login first.
+
 	Copyright(C) 2014-   Lifl@XXXX.Inc
 	Your Can Do Whatever You Want To Do With This SoftWare, No Copyright Reserved.
 """
@@ -39,6 +42,8 @@ class cli_account_manager():
 			'3'	: self.logout,
 			'4'	: self.get_account_info,
 			'5'	: self.add_account_info,
+			'6'	: self.query_account_info,
+			'7'	: self.del_account_info,
 			"h" : self.help_info,
 			'q' : self.quit,
 		}
@@ -57,11 +62,15 @@ class cli_account_manager():
 		if self.account_manager is None:
 			self.account_manager = core.web_account_manager(usr, usr_key)
 		else:
-			raise Exception
+			print "Usr:{0} has login, You Must Logout First.".format(self.account_manager.get_usr())
+			return
 		print "Usr:{0} Login Ok.".format(usr)
 
 	def logout(self):
-		pass
+		if self.account_manager is None:
+			print "You Must Login First."
+			return
+		self.account_manager = None;
 
 	def get_account_info(self):
 		if self.account_manager is None:
@@ -86,10 +95,18 @@ class cli_account_manager():
 		self.account_manager.append_record(ower=ower, account=account, alias=alias, email=email, mobile=mobile, passwd=passwd)
 		print "Add New Account Ok."
 
-	def query_account_info(self):
+	def query_account_info(self, query_string):
+		if self.account_manager is None:
+			print "You Must Login First."
+			return
+		if self.account_manager.has_attr(query_records):
+			self.account_manager.query_records(query_string)
 		pass
 
-	def del_account_info(self):
+	def del_account_info(self, del_string):
+		if self.account_manager is None:
+			print "You Must Login First."
+			return
 		pass
 
 	def help_info(self):
