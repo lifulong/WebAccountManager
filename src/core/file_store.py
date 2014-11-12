@@ -1,6 +1,10 @@
 #!/usr/bin/env	python
 # -*- coding:utf-8 -*-
 
+"""
+
+"""
+
 from exception import *
 
 class base_storage:
@@ -17,7 +21,20 @@ class base_storage:
 		if self.usr_key != usr_key:
 			raise PasswdError
 
+	def new_user(self, usr, usr_key):
+		"""
+			create or register new user to file storage
+		"""
+		if self.usr is not None:
+			raise LoginError, "Login In Usr Can Not Create New Usr,You Should Logout First."
+		self.usr = usr
+		self.usr_key = usr_key
+		self.flush_all()
+
 	def load_info_from_file(self, filename="passwd"):
+		"""
+			load and parse usr-passwd and usr account info
+		"""
 		with open(filename) as f:
 			for line in f:
 				line = line.strip('\n')
@@ -33,6 +50,10 @@ class base_storage:
 			raise UsrError
 
 	def parse_manager_usr_info(self, info_str):
+		"""
+			parse account-manager usr info to usr and passwd
+		"""
+
 		info_list = info_str.split(":")
 		if len(info_list) is not 2:
 			return False
@@ -48,6 +69,10 @@ class base_storage:
 			return True
 
 	def parse_manager_record(self, info_str):
+		"""
+			parse one record string to record tuple
+		"""
+
 		info_list = info_str.split(":")
 		if len(info_list) is not 6:
 			return None
@@ -69,11 +94,17 @@ class base_storage:
 		return self.records
 
 	def flush_one_record(self, record):
+		"""
+			append one record to record file
+		"""
 		with open("passwd", "a+") as f:
 			f.write("{0}:{1}:{2}:{3}:{4}:{5}\n".format(record[0], record[1], record[2], record[3], record[4], record[5]))
 			
 
 	def flush_all(self):
+		"""
+			flush usr&passwd and account record info to record file
+		"""
 		with open("passwd", "w+") as f:
 			if self.usr is not None:
 				f.write("usr:{0}\n".format(self.usr))
@@ -87,6 +118,7 @@ class base_storage:
 	
 	def set_usr_info(self, info):
 		"""Export interface
+			set usr&key to account info storage
 		"""
 		if type(info) is not tuple:
 			raise TypeError
@@ -98,6 +130,7 @@ class base_storage:
 
 	def set_key(self, key):
 		"""Export interface
+			set usr key to account info storage
 		"""
 		if self.usr is None:
 			raise UsrError, "Usr Is None."
@@ -118,7 +151,7 @@ class base_storage:
 		self.records.append(record)
 		self.flush_all()
 
-#Check repeat
+	#Check repeat
 	def append_record(self, record):
 		"""Export interface
 		"""
@@ -142,13 +175,6 @@ class base_storage:
 				raise ValueError
 			self.records.append(record)
 			self.flush_one_record(record)
-
-	def new_user(self, usr, usr_key):
-		if self.usr is not None:
-			raise LoginError, "Login In Usr Can Not Create New Usr,You Should Logout First."
-		self.usr = usr
-		self.usr_key = usr_key
-		self.flush_all()
 
 
 
