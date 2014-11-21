@@ -1,0 +1,16 @@
+
+{
+	"svr_addr":{
+		"ip_addr":"*",
+		"ip_port":"9666"
+	},
+
+	"storage":{
+		"_comment":"support storage type is file,sqlite,mysql,nosql",
+		"type":"file"
+	},
+
+	"debug":"true"
+
+}
+

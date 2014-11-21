@@ -9,7 +9,6 @@ import binascii
 class web_account_manager:
 
 	def __init__(self, usr=None, passwd=None):
-		#Check user valid
 		if passwd is not None:
 			usr_key = crypto.hash_usr_key(passwd)
 			key = crypto.hash_key(passwd)

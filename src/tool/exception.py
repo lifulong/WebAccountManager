@@ -24,4 +24,8 @@ class EmptyKey(KeyError):
 	"""
 	pass
 
+class ConfigError(Exception):
+	"""Exception raise while parse config file error.
+	"""
+	pass
 
