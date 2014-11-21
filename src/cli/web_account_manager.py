@@ -82,6 +82,11 @@ class cli_account_manager():
 		for record in records:
 			print "{0}:{1}:{2}:{3}:{4}:{5}\n".format(record[0], record[1], record[2], record[3], record[4], record[5])
 
+	def output_account_info(self):
+		if self.account_manager is None:
+			print "You Must Login First."
+			return
+
 	def add_account_info(self):
 		if self.account_manager is None:
 			print "You Must Login First."
