@@ -27,11 +27,8 @@
 * src/test directory
 * provide test script for account-manager[not implement]
 
-* src/tool directory
+* src/mos_tool directory
 * provide debug/logging/config tool for account-manager use[not implement]
-
-* doc directory
-* provide design description of the account-manager
 
 
 * This Version Design And Write In Less Than 8 Hours, There Is Plenty Of Room For Improment,

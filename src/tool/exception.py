@@ -1,6 +1,6 @@
 #!/usr/bin/env	python
 
-__all__ = ['UsrError', 'PasswdError', 'LoginError', 'EmptyKeyError']
+__all__ = ['UsrError', 'PasswdError', 'LoginError', 'KeyError', 'EmptyKey']
 
 class UsrError(Exception):
 	"""Exception raised by user not valid."""
@@ -14,8 +14,14 @@ class LoginError(Exception):
 	"""Exception raised while user not login Or create new usr while login."""
 	pass
 
-class EmptyKeyError(Exception):
-	"""Exception raised by has no key while crypto."""
+class KeyError(Exception):
+	"""Exception raise while input an error key.
+	"""
+	pass
+
+class EmptyKey(KeyError):
+	"""Exception raise while input an empty key.
+	"""
 	pass
 
 

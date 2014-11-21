@@ -1,42 +1,90 @@
+# account-manager
 
-## Why
+## 背景
 
-### Why Provide This Tool
+	生活的现代化，使我们存在着各种各样的帐号，帐号中有帐号密码和口令；
+	有些帐号我们并不经常使用，当需要登录的时候，我们可能会忘记密码，甚至忘记帐号。
+	本帐号管理程序就是用户满足当今用户众多帐号管理的需求。
 
-	There is too many web account we have, and too many password correspond to it.
-	It is difficult for us to remeber all of them, especially for the account that-
-	we do not use ofen. So I write this for us to storage and -
-	manage our messive web account info.
+	本程序采用Python语言实现，数据加密采用AES算法，
+	数据存储使用本地文件系统文件（后续可能支持Sqlite以及Mysql）。
 
-### Why You Can Trust It
+	源码开源，只支持本地部署，目标人群为程序员。
 
-	We store your account info in your owe pc, not in the web server.
-	We use Md5,SHA256,AES algorithm to protect your passwd.
+## 需求
 
-## What
+*	可以存储帐号、别名、密码、帐号归属、绑定邮箱、绑定手机号、描述等
+*	密码采用安全的AES加密，其他字段采用明文
+*	加密存储部分的加密密码采用SHA1加密存储
+*	有日志记录
+*	只支持本地部署
 
-### What Feature This Tool Support
+## 总体设计
 
-	1. command line interface tool
-	2. broswer interface tool [Todo]
-	3. GUI interface tool [Todo]
-	4. filesystem, sqlite, mysql as your storage, you can choice any one you like [Todo]
-	5. add, query, del, update your web account info [Todo]
-	6. easy install [Todo]
+### 层次化、模块化、服务化设计
 
-## How
+	1. 用户交互层（命令行客户端[直接连接TCP服务器]、浏览器[连接HTTP服务器]）（ [Android不支持]）
+	2. HTTP服务器（Web客户端支持）
+	2. 加密解密层（将密码加密后与明文用户信息一起交给数据存储层）[TCP服务化]
+	3. 数据存储层（提供适配各种数据存储的接口,统一为Add,Mod,Del,Get接口）[后续改进TCP服务化]
+		
+### 管理工具帐号密码存储
 
-### How To Install
+	1. 管理工具帐号口令规格化
+		口令进行HASH运算后转化为32B十六进制字符串存储
+	2. 多用户支持
 
-	1. You should install pycrypto-2.6.1 or newer first before you install this tool
+### 架构
 
-### How To Use
+>		---------------------			-------------
+>		|Command Line Client|			|Web Browser|
+>		---------------------			-------------
+>				||							||
+>				||							||
+>				||							||
+>				||							||
+>				||							\/
+>				||						-----------------
+>				||						|HTTP Web Server|
+>				||						-----------------
+>				||							||
+>				||							||
+>				\/							\/
+>
+>			-----------------------------------------
+>			|	Inner		Tcp		Server			|
+>			-----------------------------------------
+>							||
+>							||
+>							||
+>							||
+>							\/
+>					-----------------
+>					|	DataBase	|
+>					-----------------
+>
 
 
+### 调试输出可定制
 
-## Who
 
-### Who Is Contibute
-	
-*	Lifl/Mosai		<msl.fulong@gmail.com>	[http://lifulong.me](http://lifulong.me) [GitHub](https://github.com/lifulong)
+### 记录日志
+
+
+## 存储
+
+### 密码文件设计
+
+#### 用户文件格式
+
+#### 密码记录格式
+
+	Owner	:	Account		:	Alias	:	Email	:	Mobile	:	Passwd
+	BaiDu:leefulong:#:msl.fulong@gmail.com:18311092031:FE0ED8231224D3A1B8C71224D3A1B8C7
+	TengXun:454574689:#:msl.fulong@gmail.com::FE0ED8231224D3A1B8C71224D3A1B8C7
+	GitHub:msl.fulong@gmail.com:#:msl.fulong@gmail.com::FE0ED8231224D3A1B8C71224D3A1B8C7
+
+### sqlite存储
+
+
 

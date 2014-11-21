@@ -8,8 +8,10 @@ if config_usr_info_storage is "sqlite":
 	import sqlite_store as key_storage
 elif config_usr_info_storage is "mysql":
 	import mysql_store as key_storage
-else:
+elif config_usr_info_storage is "file":
 	import file_store as key_storage
+else :
+	pass
 
 
 class storage(key_storage.base_storage):
