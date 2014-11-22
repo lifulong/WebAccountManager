@@ -1,0 +1,12 @@
+{
+	"_comment":"command client for account manager tcp server.",
+	"debug":"true",
+	"network":{
+		"address":"127.0.0.1",
+		"port":"9444",
+		"io_comment":"select,poll,async",
+		"iomodule":"async",
+		"keep-alive":"true"
+	}
+}
+

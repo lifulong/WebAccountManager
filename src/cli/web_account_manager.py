@@ -3,8 +3,6 @@
 
 import sys
 
-sys.path.append("..")
-
 from core import core
 
 help_msg = """
@@ -47,30 +45,30 @@ class cli_account_manager():
 			"h" : self.help_info,
 			'q' : self.quit,
 		}
-		self.account_manager = None
+		self.account_manager = core.web_account_manager()
 
 	def create_user(self):
-		self.account_manager = core.web_account_manager()
+
 		usr = raw_input("Please Input Your User Name, And Press <Enter>:")
 		usr_key = raw_input("Please Input Your Pass Word, And Press <Enter>:")
-		self.account_manager.create_manager_usr(usr, usr_key)
+		self.account_manager.register(usr, usr_key)
 		print "Create One New User:{0},UsrKey:{1}".format(usr, usr_key)
 
 	def login(self):
+
 		usr = raw_input("Please Input Your User Name, And Press <Enter>:")
 		usr_key = raw_input("Please Input Your Pass Word, And Press <Enter>:")
-		if self.account_manager is None:
-			self.account_manager = core.web_account_manager(usr, usr_key)
-		else:
-			print "Usr:{0} has login, You Must Logout First.".format(self.account_manager.get_usr())
+		if "LOGIN_YET" == self.account_manager.login(usr, usr_key):
+			print "Usr:{0} has login, You Must Logout First.".\
+				format(self.account_manager.get_usr())
 			return
 		print "Usr:{0} Login Ok.".format(usr)
 
 	def logout(self):
-		if self.account_manager is None:
+
+		if "NO_LOGIN" == self.account_manager.logout():
 			print "You Must Login First."
 			return
-		self.account_manager = None;
 
 	def get_account_info(self):
 		if self.account_manager is None:
@@ -106,7 +104,7 @@ class cli_account_manager():
 			return
 		if self.account_manager.has_attr(query_records):
 			self.account_manager.query_records(query_string)
-		pass
+		self.account_manager.get_records(query_string)
 
 	def del_account_info(self, del_string):
 		if self.account_manager is None:
@@ -121,13 +119,14 @@ class cli_account_manager():
 		sys.exit()
 
 	def run(self):
-		print help_msg
+		print help_msg,
 		while True:
-			print choice_msg
+			print choice_msg,
 			choice = raw_input("Please Input Your Choice Charator,Then Press <Enter>:")
 			self._key_method_[choice]()
 
 if __name__ == '__main__':
+
 	manager = cli_account_manager()
 	manager.run()
 	
